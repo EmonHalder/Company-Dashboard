@@ -1,5 +1,13 @@
+// import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+// import 'package:widget_practice/account/account.dart';
 import 'package:widget_practice/dashboard/dashboard.dart';
+// import 'package:widget_practice/notification/notification.dart';
+// import 'package:widget_practice/pi_chart/chart.dart';
+// import 'package:widget_practice/our_event/event.dart';
+// import 'package:widget_practice/from_validation/validation.dart';
+// import 'package:widget_practice/dashboard/dashboard.dart';
 // import 'package:widget_practice/from/from.dart';
 // import 'package:widget_practice/sizebox/sizeBox.dart';
 // import 'package:widget_practice/from/from.dart';
@@ -20,7 +28,13 @@ class MyApp extends StatelessWidget {
       title: "My App",
       // home: Listview(),
       // home: SignUpPage(),
+      // home: Sizebox(),
+      // home: HomePage(),
       home: Dashboard(),
+      // home: MyAccountPage(),
+      // home: Chart(),
+
+      // home: NotificationPage(),
     );
   }
 }

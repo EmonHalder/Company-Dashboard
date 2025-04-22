@@ -1,52 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:widget_practice/Employee/employee.dart';
-import 'package:widget_practice/account/account.dart';
 import 'package:widget_practice/all_branch/all_branch.dart';
+import 'package:widget_practice/dashboard/dashboard.dart';
 import 'package:widget_practice/departments/departments.dart';
 import 'package:widget_practice/notification/notification.dart';
 import 'package:widget_practice/our_event/event.dart';
 import 'package:widget_practice/partners/partners.dart';
 import 'package:widget_practice/tour_support/tour_support.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
-
-  @override
-  _DashboardState createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
-  // Index for BottomNavigationBar
-  int _selectedIndex = 0;
-
-  // Function to handle Bottom Navigation Bar item selection
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  // Pages to show based on the selected BottomNavigationBar item
-  final List<Widget> _pages = [
-    // Home Page
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 24))),
-    // Search Page
-    Center(child: Text('Search Screen', style: TextStyle(fontSize: 24))),
-    // Notifications Page
-    Center(child: Text('Notifications Screen', style: TextStyle(fontSize: 24))),
-    // Profile Page
-    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 24))),
-  ];
+class MyAccountPage extends StatelessWidget {
+  const MyAccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar //
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         title: Text(
-          ' Dashboard',
+          'Account',
           style: TextStyle(
               fontSize: 22, color: Colors.white, fontWeight: FontWeight.w400),
         ),
@@ -155,80 +127,51 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
-      // body //
-      body: Padding(
-        padding: const EdgeInsets.only(
-            top: 50.0, left: 8.0, right: 8.0), // Added top gap of 50px
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // Three boxes per row
-            crossAxisSpacing: 10, // Horizontal space between boxes
-            mainAxisSpacing: 10, // Vertical space between boxes
-            childAspectRatio: 1.2, // Adjusting the aspect ratio of boxes
-          ),
-          itemCount: 6, // Total boxes
-          itemBuilder: (context, index) {
-            // Box titles
-            List<String> titles = [
-              "Employs",
-              "All Branch",
-              "Event",
-              "Tour Support", // Additional box 1
-              "Departments", // Additional box 2
-              "Partners" // Additional box 3
-            ];
-
-            // Box colors
-            List<Color> colors = [
-              Colors.blue,
-              Colors.blue,
-              Colors.blue,
-              Colors.blue, // Additional color 1
-              Colors.blue, // Additional color 2
-              Colors.blue // Additional color 3
-            ];
-
-            return Container(
-              width: 120,
-              height: 120,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: colors[index],
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  colors: [colors[index], colors[index].withOpacity(0.6)],
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            // Profile picture
+            Center(
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: NetworkImage(
+                  'https://scontent.fcla7-1.fna.fbcdn.net/v/t39.30808-1/480062327_1966396297218777_8434310990558978119_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=e99d92&_nc_ohc=iFy-1JEdE4EQ7kNvwGF0Pjg&_nc_oc=AdlecCtdnnPb8CGts-5Rybi0itk1wYgSyPxmEZiJL0rIZi4JeT5W0YnGMnQ5mAWvuf0&_nc_zt=24&_nc_ht=scontent.fcla7-1.fna&_nc_gid=Hsqe2r7A360XGMK1_PyEBg&oh=00_AfFvF-c9QO2tLOj4Q6KzwdDnR_Cnpa44JqnKaRlrsmUN5g&oe=680D34D8', // Sample profile image
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26, // shadow color
-                    offset: Offset(4, 4), // x and y axis
-                    blurRadius: 10, // softness of shadow
-                    spreadRadius: 1, // how much it spreads
-                  ),
-                ],
               ),
-              child: Text(
-                titles[index],
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+
+            // Name
+            _buildInfoTile(
+                "Emon Halder", "Sr. Flutter developer", Icons.person),
+
+            // Email
+            _buildInfoTile("Email", "emon.maktech@gmail.com", Icons.email),
+
+            // Address
+            _buildInfoTile("Address",
+                "Pragati sarani, Jamuna Future Park, Dhaka", Icons.location_on),
+
+            const SizedBox(height: 20),
+
+            // Optional: Edit button
+            ElevatedButton.icon(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Edit profile coming soon...")),
+                );
+              },
+              icon: const Icon(Icons.edit),
+              label: const Text("Edit Profile"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
               ),
-            );
-          },
+            )
+          ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.blue, // 🔵 Button color set to blue
-          child: const Icon(
-            Icons.call,
-            color: Colors.white,
-          )),
-
-      // BottomNavigationBar at the bottom //
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
         elevation: 10,
@@ -258,11 +201,7 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                   size: 30,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex = 2;
-                  });
-                },
+                onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(
@@ -270,11 +209,7 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                   size: 30,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex = 3;
-                  });
-                },
+                onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(
@@ -282,14 +217,7 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                   size: 30,
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MyAccountPage(),
-                    ),
-                  );
-                },
+                onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(
@@ -297,15 +225,27 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                   size: 30,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex = 2;
-                  });
-                },
+                onPressed: () {},
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoTile(String label, String value, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.blue),
+        title: Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(value),
+        tileColor: Colors.grey.shade100,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }

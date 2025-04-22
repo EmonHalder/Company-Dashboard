@@ -18,15 +18,16 @@ class Sizebox extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
           ),
-          Container(),
+          // Container(),
           Text("data"),
           SizedBox(
             width: 100,
             height: 100,
             child: Container(
               decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.red)),
-              color: Colors.blue,
+                border: Border.all(width: 1, color: Colors.red),
+                color: Colors.blue,
+              ),
             ),
           )
         ],
