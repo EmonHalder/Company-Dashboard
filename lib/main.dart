@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 // import 'package:widget_practice/account/account.dart';
 import 'package:widget_practice/dashboard/dashboard.dart';
+import 'package:widget_practice/gridView/gridView.dart';
 // import 'package:widget_practice/notification/notification.dart';
 // import 'package:widget_practice/pi_chart/chart.dart';
 // import 'package:widget_practice/our_event/event.dart';
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
       // home: Sizebox(),
       // home: HomePage(),
       home: Dashboard(),
+      // home: Gridview(),
+
       // home: MyAccountPage(),
       // home: Chart(),
 

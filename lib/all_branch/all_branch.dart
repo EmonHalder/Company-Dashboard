@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:widget_practice/Employee/employee.dart';
 import 'package:widget_practice/account/account.dart';
 import 'package:widget_practice/dashboard/dashboard.dart';
@@ -11,30 +12,31 @@ import 'package:widget_practice/tour_support/tour_support.dart';
 class AllBranch extends StatelessWidget {
   const AllBranch({super.key});
 
+  final List<Color> colors = const [
+    Colors.blueAccent,
+    Colors.green,
+    Colors.purple,
+    Colors.orange,
+    // চাইলে আরও কালার যোগ করো
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Text(
-          ' AllBranch',
-          style: TextStyle(
-              fontSize: 22, color: Colors.white, fontWeight: FontWeight.w400),
+        title: const Text(
+          'All Branch',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
         ),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.notification_add_rounded, // User profile icon
-              color: Colors.white,
-            ),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
-              // Handle user profile icon tap
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationPage(),
-                ),
+                MaterialPageRoute(builder: (context) => NotificationPage()),
               );
             },
           ),
@@ -45,103 +47,100 @@ class AllBranch extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
               child: Text(
                 'Mak Tech Solution',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
             ),
-            ListTile(
-                leading: Icon(Icons.people, color: Colors.blue),
-                title: Text("Employees"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Employee(),
-                    ),
-                  );
-                }),
-            ListTile(
-                leading: Icon(Icons.account_tree, color: Colors.blue),
-                title: Text("All Branch"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AllBranch(),
-                    ),
-                  );
-                }),
-            ListTile(
-                leading: Icon(Icons.event, color: Colors.blue),
-                title: Text("Events"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Event(),
-                    ),
-                  );
-                }),
-            ListTile(
-                leading: Icon(Icons.card_travel, color: Colors.blue),
-                title: Text("Tour Support"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TourSupport(),
-                    ),
-                  );
-                }),
-            ListTile(
-                leading: Icon(Icons.business, color: Colors.blue),
-                title: Text("Departments"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Departments(),
-                    ),
-                  );
-                }),
-            ListTile(
-                leading: Icon(Icons.handshake, color: Colors.blue),
-                title: Text("Partners"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Partners(),
-                    ),
-                  );
-                }),
+            _drawerTile(
+                icon: Icons.people,
+                text: "Employees",
+                context: context,
+                target: Employee()),
+            _drawerTile(
+                icon: Icons.account_tree,
+                text: "All Branch",
+                context: context,
+                target: AllBranch()),
+            _drawerTile(
+                icon: Icons.event,
+                text: "Events",
+                context: context,
+                target: Event()),
+            _drawerTile(
+                icon: Icons.card_travel,
+                text: "Tour Support",
+                context: context,
+                target: TourSupport()),
+            _drawerTile(
+                icon: Icons.business,
+                text: "Departments",
+                context: context,
+                target: Departments()),
+            _drawerTile(
+                icon: Icons.handshake,
+                text: "Partners",
+                context: context,
+                target: Partners()),
           ],
         ),
       ),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Dashboard(),
-                )),
-            child: Center(
-                child: Text(
-              " Go to dashboard",
-              style: TextStyle(color: Colors.blue),
-            )),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
           ),
-        ],
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.lightBlue,
+                          Colors.lightBlue,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                          color: Colors.white.withOpacity(0.4), width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: const Offset(4, 4),
+                          blurRadius: 10,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Branch ${index + 1}",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
@@ -152,63 +151,42 @@ class AllBranch extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                icon: const Icon(
-                  Icons.home,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Dashboard(),
-                      ));
-                },
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.whatshot,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MyAccountPage(),
-                    ),
-                  );
-                },
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {},
-              ),
+              _navIcon(context, Icons.home, () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => Dashboard()));
+              }),
+              _navIcon(context, Icons.search, () {}),
+              _navIcon(context, Icons.person, () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => MyAccountPage()));
+              }),
+              _navIcon(context, Icons.logout, () {}),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _drawerTile(
+      {required IconData icon,
+      required String text,
+      required BuildContext context,
+      required Widget target}) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.blue),
+      title: Text(text),
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => target));
+      },
+    );
+  }
+
+  Widget _navIcon(BuildContext context, IconData icon, VoidCallback onPressed) {
+    return IconButton(
+      icon: Icon(icon, color: Colors.white, size: 30),
+      onPressed: onPressed,
     );
   }
 }
