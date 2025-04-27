@@ -9,7 +9,28 @@ import 'package:widget_practice/partners/partners.dart';
 import 'package:widget_practice/tour_support/tour_support.dart';
 
 class Employee extends StatelessWidget {
-  const Employee({super.key});
+  final List<String> names;
+  final List<String> designations;
+  final List<int> ages;
+
+  const Employee({
+    super.key,
+    this.names = const [
+      'John Doe',
+      'Jane Smith',
+      'Alex Johnson',
+      'Emily Davis',
+      'Michael Brown'
+    ],
+    this.designations = const [
+      'Manager',
+      'Developer',
+      'Designer',
+      'HR',
+      'Sales'
+    ],
+    this.ages = const [30, 25, 28, 32, 29],
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,24 +38,21 @@ class Employee extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Text(
-          ' Employee',
+        title: const Text(
+          'Employee',
           style: TextStyle(
               fontSize: 22, color: Colors.white, fontWeight: FontWeight.w400),
         ),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.notification_add_rounded, // User profile icon
+            icon: const Icon(
+              Icons.notifications,
               color: Colors.white,
             ),
             onPressed: () {
-              // Handle user profile icon tap
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationPage(),
-                ),
+                MaterialPageRoute(builder: (context) => NotificationPage()),
               );
             },
           ),
@@ -45,7 +63,7 @@ class Employee extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -59,89 +77,85 @@ class Employee extends StatelessWidget {
               ),
             ),
             ListTile(
-                leading: Icon(Icons.people, color: Colors.blue),
-                title: Text("Employees"),
+                leading: const Icon(Icons.people, color: Colors.blue),
+                title: const Text("Employees"),
+                onTap: () {
+                  Navigator.pop(
+                      context); // just close drawer, not open new page
+                }),
+            ListTile(
+                leading: const Icon(Icons.account_tree, color: Colors.blue),
+                title: const Text("All Branch"),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => Employee(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const AllBranch()),
                   );
                 }),
             ListTile(
-                leading: Icon(Icons.account_tree, color: Colors.blue),
-                title: Text("All Branch"),
+                leading: const Icon(Icons.event, color: Colors.blue),
+                title: const Text("Events"),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => AllBranch(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const Event()),
                   );
                 }),
             ListTile(
-                leading: Icon(Icons.event, color: Colors.blue),
-                title: Text("Events"),
+                leading: const Icon(Icons.card_travel, color: Colors.blue),
+                title: const Text("Tour Support"),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Event(),
-                    ),
+                        builder: (context) => const TourSupport()),
                   );
                 }),
             ListTile(
-                leading: Icon(Icons.card_travel, color: Colors.blue),
-                title: Text("Tour Support"),
+                leading: const Icon(Icons.business, color: Colors.blue),
+                title: const Text("Departments"),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TourSupport(),
-                    ),
+                        builder: (context) => const Departments()),
                   );
                 }),
             ListTile(
-                leading: Icon(Icons.business, color: Colors.blue),
-                title: Text("Departments"),
+                leading: const Icon(Icons.handshake, color: Colors.blue),
+                title: const Text("Partners"),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => Departments(),
-                    ),
-                  );
-                }),
-            ListTile(
-                leading: Icon(Icons.handshake, color: Colors.blue),
-                title: Text("Partners"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Partners(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const Partners()),
                   );
                 }),
           ],
         ),
       ),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Dashboard(),
-                )),
-            child: Center(
-                child: Text(
-              " Go to dashboard",
-              style: TextStyle(color: Colors.blue),
-            )),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView.builder(
+          itemCount: names.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  leading: const Icon(Icons.person),
+                  title: Text(names[index]),
+                  subtitle:
+                      Text("${designations[index]} • ${ages[index]} years old"),
+                  trailing: const Icon(Icons.send),
+                ),
+              ),
+            );
+          },
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
@@ -153,56 +167,34 @@ class Employee extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                icon: const Icon(
-                  Icons.home,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Dashboard(),
-                      ));
-                },
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.whatshot,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: 30,
-                ),
+                icon: const Icon(Icons.home, color: Colors.white, size: 30),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => MyAccountPage(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const Dashboard()),
                   );
                 },
               ),
               IconButton(
-                icon: const Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                  size: 30,
-                ),
+                icon: const Icon(Icons.whatshot, color: Colors.white, size: 30),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.search, color: Colors.white, size: 30),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.person, color: Colors.white, size: 30),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MyAccountPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.logout, color: Colors.white, size: 30),
                 onPressed: () {},
               ),
             ],

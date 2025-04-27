@@ -17,26 +17,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   // Index for BottomNavigationBar
-  int _selectedIndex = 0;
-
-  // Function to handle Bottom Navigation Bar item selection
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  // Pages to show based on the selected BottomNavigationBar item
-  final List<Widget> _pages = [
-    // Home Page
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 24))),
-    // Search Page
-    Center(child: Text('Search Screen', style: TextStyle(fontSize: 24))),
-    // Notifications Page
-    Center(child: Text('Notifications Screen', style: TextStyle(fontSize: 24))),
-    // Profile Page
-    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 24))),
-  ];
+  // int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +74,25 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Employee(),
+                      builder: (context) => Employee(
+                        names: [
+                          "Emon",
+                          "Heron",
+                          "Kiron",
+                          "Diron",
+                          "Niron",
+                          "Tiron"
+                        ],
+                        designations: [
+                          "Flutter developer",
+                          "Flutter developer",
+                          "Flutter developer",
+                          "Flutter developer",
+                          "Flutter developer",
+                          "Flutter developer"
+                        ],
+                        ages: [23, 25, 32, 28, 30, 24],
+                      ), 
                     ),
                   );
                 }),
@@ -258,11 +257,7 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                   size: 30,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex = 2;
-                  });
-                },
+                onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(
@@ -270,11 +265,7 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                   size: 30,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex = 3;
-                  });
-                },
+                onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(
@@ -297,11 +288,7 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                   size: 30,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex = 2;
-                  });
-                },
+                onPressed: () {},
               ),
             ],
           ),
