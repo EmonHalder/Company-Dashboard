@@ -17,7 +17,6 @@ class AllBranch extends StatelessWidget {
     Colors.green,
     Colors.purple,
     Colors.orange,
-    // চাইলে আরও কালার যোগ করো
   ];
 
   @override

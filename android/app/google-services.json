@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554141462006",
+    "project_id": "company-dashboard-dea15",
+    "storage_bucket": "company-dashboard-dea15.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554141462006:android:17b1e5ddf95207d1762bd7",
+        "android_client_info": {
+          "package_name": "com.example.widget_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDftxf7h6jgP_yrTnisLur8AId0gsohRdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

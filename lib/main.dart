@@ -1,10 +1,13 @@
-// import 'dart:ffi';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:widget_practice/aspectRatio/aspectRatio.dart';
 // import 'package:widget_practice/account/account.dart';
 import 'package:widget_practice/dashboard/dashboard.dart';
+import 'package:widget_practice/from/from.dart';
 import 'package:widget_practice/gridView/gridView.dart';
 import 'package:widget_practice/increment_button/increment.dart';
+import 'package:widget_practice/media_query/mediaQuery.dart';
+import 'package:widget_practice/todoList/todolist.dart';
 // import 'package:widget_practice/notification/notification.dart';
 // import 'package:widget_practice/pi_chart/chart.dart';
 // import 'package:widget_practice/our_event/event.dart';
@@ -17,6 +20,8 @@ import 'package:widget_practice/increment_button/increment.dart';
 // import 'package:widget_practice/dashboard/dashboard.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -37,7 +42,10 @@ class MyApp extends StatelessWidget {
       // home: MyAccountPage(),
       // home: Chart(),
       // home: NotificationPage(),
-      home: Increment(),
+      // home: Increment(),
+      // home: Todolist(),
+      // home: Mediaquery(),
+      home: Aspectratio(),
     );
   }
 }
