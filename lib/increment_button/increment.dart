@@ -40,7 +40,7 @@ class _IncrementState extends State<Increment> {
           ElevatedButton(
             onPressed: () {
               incrementCount();
-            },
+            }, 
             child: Icon(Icons.add),
           ),
           ElevatedButton(

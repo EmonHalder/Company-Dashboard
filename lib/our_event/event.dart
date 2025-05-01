@@ -127,21 +127,18 @@ class Event extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Dashboard(),
-                )),
-            child: Center(
-                child: Text(
-              " Go to dashboard",
-              style: TextStyle(color: Colors.blue),
-            )),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Card(
+              child: ListTile(
+                title: Text("Anual picnic"),
+                subtitle: Text("December in 2024"),
+              ),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,

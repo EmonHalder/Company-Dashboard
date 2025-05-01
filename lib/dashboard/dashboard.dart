@@ -92,7 +92,7 @@ class _DashboardState extends State<Dashboard> {
                           "Flutter developer"
                         ],
                         ages: [23, 25, 32, 28, 30, 24],
-                      ), 
+                      ),
                     ),
                   );
                 }),
